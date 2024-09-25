@@ -1,0 +1,294 @@
+L1 cache size (KB) = 896 
+L2 cache size (KB) = 7168
+#/2 elements L1 = 57344 
+#/2 elements L2 = 458752
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 2, m_r = 2
+Time taken: 24.325030 seconds
+GFLOPS: 11.035360
+GFLOPS Utilization: 0.418006
+B block size (KB)/L1 Cache size: 1/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 4, m_r = 2
+Time taken: 24.289449 seconds
+GFLOPS: 11.051525
+GFLOPS Utilization: 0.418618
+B block size (KB)/L1 Cache size: 2/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 8, m_r = 2
+Time taken: 24.211112 seconds
+GFLOPS: 11.087283
+GFLOPS Utilization: 0.419973
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 2, m_r = 4
+Time taken: 35.457555 seconds
+GFLOPS: 7.570614
+GFLOPS Utilization: 0.286766
+B block size (KB)/L1 Cache size: 1/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 4, m_r = 4
+Time taken: 35.306128 seconds
+GFLOPS: 7.603084
+GFLOPS Utilization: 0.287996
+B block size (KB)/L1 Cache size: 2/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 8, m_r = 4
+Time taken: 35.208330 seconds
+GFLOPS: 7.624203
+GFLOPS Utilization: 0.288796
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 2, m_r = 8
+Time taken: 56.260973 seconds
+GFLOPS: 4.771255
+GFLOPS Utilization: 0.180729
+B block size (KB)/L1 Cache size: 1/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 4, m_r = 8
+Time taken: 56.187339 seconds
+GFLOPS: 4.777508
+GFLOPS Utilization: 0.180966
+B block size (KB)/L1 Cache size: 2/896
+A block size (KB)/L2 Cache size: 55/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 84, k_c = 84, n_r = 8, m_r = 8
+^C
+$ ^C
+$  gcc -fopenmp -O0 -march=native -fno-tree-vectorize -mno-fma goto_van.c -o gotovan -lm
+$ taskset -c 0 ./gotovan
+Affinity mask set to core(s): 0 
+L1 cache size (KB) = 896 
+L2 cache size (KB) = 7168
+#/2 elements L1 = 57344 
+#/2 elements L2 = 458752
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 2, m_r = 2
+Time taken: 12.380179 seconds
+GFLOPS: 21.682680
+GFLOPS Utilization: 0.821314
+B block size (KB)/L1 Cache size: 2/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 4, m_r = 2
+Time taken: 12.371025 seconds
+GFLOPS: 21.698723
+GFLOPS Utilization: 0.821921
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 8, m_r = 2
+Time taken: 12.352123 seconds
+GFLOPS: 21.731928
+GFLOPS Utilization: 0.823179
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 2, m_r = 4
+Time taken: 18.141730 seconds
+GFLOPS: 14.796574
+GFLOPS Utilization: 0.560476
+B block size (KB)/L1 Cache size: 2/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 4, m_r = 4
+Time taken: 18.201604 seconds
+GFLOPS: 14.747901
+GFLOPS Utilization: 0.558633
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 8, m_r = 4
+Time taken: 18.810518 seconds
+GFLOPS: 14.270498
+GFLOPS Utilization: 0.540549
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 2, m_r = 8
+Time taken: 30.193687 seconds
+GFLOPS: 8.890450
+GFLOPS Utilization: 0.336759
+B block size (KB)/L1 Cache size: 2/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 4, m_r = 8
+Time taken: 29.913399 seconds
+GFLOPS: 8.973753
+GFLOPS Utilization: 0.339915
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 168, k_c = 168, n_r = 8, m_r = 8
+Time taken: 29.837121 seconds
+GFLOPS: 8.996694
+GFLOPS Utilization: 0.340784
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 220/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 2, m_r = 2
+Time taken: 6.520685 seconds
+GFLOPS: 41.166756
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 4, m_r = 2
+Time taken: 6.530053 seconds
+GFLOPS: 41.107696
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 8, m_r = 2
+Time taken: 6.543957 seconds
+GFLOPS: 41.020360
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 21/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 2, m_r = 4
+Time taken: 9.618966 seconds
+GFLOPS: 27.906893
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 4, m_r = 4
+Time taken: 9.595639 seconds
+GFLOPS: 27.974734
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 8, m_r = 4
+Time taken: 9.592237 seconds
+GFLOPS: 27.984657
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 21/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 2, m_r = 8
+Time taken: 15.746124 seconds
+GFLOPS: 17.047716
+GFLOPS Utilization: 0.645747
+B block size (KB)/L1 Cache size: 5/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 4, m_r = 8
+Time taken: 15.464813 seconds
+GFLOPS: 17.357821
+GFLOPS Utilization: 0.657493
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 336, k_c = 336, n_r = 8, m_r = 8
+Time taken: 15.264421 seconds
+GFLOPS: 17.585695
+GFLOPS Utilization: 0.666125
+B block size (KB)/L1 Cache size: 21/896
+A block size (KB)/L2 Cache size: 882/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 2, m_r = 2
+Time taken: 3.252181 seconds
+GFLOPS: 82.540142
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 4, m_r = 2
+Time taken: 3.248630 seconds
+GFLOPS: 82.630345
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 21/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 8, m_r = 2
+Time taken: 3.234754 seconds
+GFLOPS: 82.984805
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 42/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 2, m_r = 4
+Time taken: 4.720793 seconds
+GFLOPS: 56.862359
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 4, m_r = 4
+Time taken: 4.720350 seconds
+GFLOPS: 56.867706
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 21/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 8, m_r = 4
+Time taken: 4.718992 seconds
+GFLOPS: 56.884067
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 42/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 2, m_r = 8
+Time taken: 8.099221 seconds
+GFLOPS: 33.143368
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 10/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 4, m_r = 8
+Time taken: 8.088208 seconds
+GFLOPS: 33.188495
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 21/896
+A block size (KB)/L2 Cache size: 3528/7168
+
+Matrix Size (N): 5120
+Testing with Block Sizes: m_c = 672, k_c = 672, n_r = 8, m_r = 8
+Time taken: 8.092853 seconds
+GFLOPS: 33.169445
+GFLOPS Utilization: 1.000000
+B block size (KB)/L1 Cache size: 42/896
+A block size (KB)/L2 Cache size: 3528/7168
