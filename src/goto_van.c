@@ -16,11 +16,11 @@
 #include <omp.h>
 
 
-#define CACHE_L1_SIZE (896 * 1024)  // L1 cache size 
-#define CACHE_L2_SIZE (double)(7 * 1024 * 1024)  // L2 cache size
+#define CACHE_L1_SIZE (192 * 1024)  // L1 cache size 
+#define CACHE_L2_SIZE (double)(1.5 * 1024 * 1024)  // L2 cache size
 #define ELEMENT_SIZE sizeof(double)  // Size of each matrix element
-#define MAX_FREQ (3.3) // Max Clock Frequency of CPU core
-#define MAX_FLOPS (MAX_FREQ * 8) // Max Gflops per core of CPU
+#define MAX_FREQ (3.97) // Max Clock Frequency of CPU core
+#define MAX_FLOPS (MAX_FREQ * 4 * 2 * 2) // Max Gflops per core of CPU
 #define CACHE_L1_SIZE_KB (CACHE_L1_SIZE / 1024.00) // L1 cache size kb
 #define CACHE_L2_SIZE_KB (CACHE_L2_SIZE / 1024.00) // L2 cache size kb
 
@@ -56,7 +56,7 @@ void multiply_block(double* A_block, double* B_sliver, double* C_block, int m_r,
 /**
  * Performs a blocked matrix multiplication using the Generalized Blocked Panel algorithm. 
  * where matrices A, B, and C are stored in column-major order. 
- * The function breaks the matricesinto smaller blocks that fit into the L1 and L2 caches.
+ * The function breaks the matrices into smaller blocks that fit into the L1 and L2 caches.
  * @param N The dimension of the square matrices
  * @param A Pointer to the matrix A
  * @param B Pointer to the matrix B
@@ -90,7 +90,7 @@ void gebp(int N, double* A, double* B, double* C, int m_c, int k_c, int n_r, int
             {
                 for (int i = 0; i < m_c && i_block + i < N; i++) 
                 {
-                    A_block[k * m_c + i] = A[(k_block + k) * N + (i_block + i)];  // Column-major access for A
+                    A_block[k * m_c + i] = A[(k_block + k) * N + (i_block + i)]; 
                 }
             }
 
@@ -144,7 +144,7 @@ int main()
     int nr_sizes[] = {2, 4, 8}; 
 
     // Dimension of square matricies
-    int N = 512 * 5;
+    int N = 512 * 6;
 
     double* A = (double*)malloc(N * N * sizeof(double)); // A matrix
     double* B = (double*)malloc(N * N * sizeof(double)); // B matrix
@@ -201,12 +201,13 @@ int main()
 
                 // Approximate GFLOPS
                 double gflops = ((double) N * N * N * 2 / time_taken) / 1e9;
-                if (gflops > MAX_FLOPS) {gflops = MAX_FLOPS;}
+                
+                //if (gflops > MAX_FLOPS) {gflops = MAX_FLOPS;}
                 printf("GFLOPS: %lf\n", gflops);
 
                 // Approximate GFLOPS utilization
                 double gflops_util = gflops / MAX_FLOPS;
-                if (gflops_util > 1) {gflops_util = .99;}
+                //if (gflops_util > 1) {gflops_util = .99;}
                 printf("GFLOPS Utilization: %lf\n", gflops_util);
                 fprintf(fp, "%d,%d,%d,%lf,%f,%lf\n", k_c, n_r, m_r, gflops, time_taken, gflops_util);
 
