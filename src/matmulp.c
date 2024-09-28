@@ -3,6 +3,7 @@
  * Uta - Parallel proccesing
  * Performing matrix multiplication using different
  * loop orderings and tiems them. 
+ * gcc -fopenmp -O3 -march=native  matmulp.c -o matmulp -lm
  */
 
 #include <stdio.h>

@@ -28,7 +28,7 @@ ax.set_zlabel('mr')
 plt.title('3D Relationship between kc/mc, nr, mr, and GFLOPS')
 
 # Optionally rotate the plot for better viewing
-ax.view_init(elev=30, azim=20)  # Adjust the elevation and azimuthal angle for rotation
+ax.view_init(elev=10, azim=120)  # Adjust the elevation and azimuthal angle for rotation
 
 # Set plot title
 ax.set_title('3D Scatter Plot of GFLOPS vs kc/mc, nr, and mr')

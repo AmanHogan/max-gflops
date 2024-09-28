@@ -1,7 +1,6 @@
 {
     "files.associations": {
         "*.ejs": "html",
-        "omp.h": "c",
-        "matrix_ops.h": "c"
+        "time.h": "c"
     }
 }
