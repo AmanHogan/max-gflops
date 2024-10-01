@@ -22,10 +22,16 @@
 #define CACHE_L2_SIZE (double)(256 * 1024)  // L2 cache size
 #define ELEMENT_SIZE sizeof(double)  // Size of each matrix element
 #define MAX_FREQ (3.97) // Max Clock Frequency of CPU core
-#define MAX_FLOPS (MAX_FREQ * 4 * 2 * 2) // Max Gflops per core of CPU
 #define L1_SIZE_KB (CACHE_L1_SIZE / 1024.00) // L1 cache size kb
 #define L2_SIZE_KB (CACHE_L2_SIZE / 1024.00) // L2 cache size kb
-#define DEFAULT_N (1024 * 4) // Default dims of matricies
+#define DEFAULT_N (1024 * 3) // Default dims of matricies
+
+/**
+ * Max Clock Frequency of CPU core.
+ *  (Frequency in GHz) x (# doubles in AVX size)
+ *  x (2 for FMA instruction) x (# of AVX units)
+ */
+#define MAX_FLOPS (MAX_FREQ * 4 * 2 * 2) // Max Gflops per core of CPU
 
 /**
  * ## GEBP Algorithm
@@ -105,9 +111,9 @@ int main(int argc, char* argv[])
         debug = atoi(argv[1]);
     }
 
-    int kc_sizes[] = {N/24}; // Different sizes of columns of block A
-    int mr_sizes[] = {16, 32, 64}; // Different sizes of register blocking batches
-    int nr_sizes[] = {8};  // Different sizes of number of rows in Block B
+    int kc_sizes[] = {N/32, N/30, N/28, N/24, N/20}; // Different sizes of columns of block A
+    int mr_sizes[] = {4, 8, 16, 32, 96}; // Different sizes of register blocking batches
+    int nr_sizes[] = {4, 8, 16};  // Different sizes of number of rows in Block B
 
     printf("Debug mode: %s\n", debug ? "ON" : "OFF");
     fprintf(fp, "kc/mc,nr,mr,gflops,time (seconds),util, A block (KB), B Sliver (KB)\n");
@@ -170,9 +176,3 @@ int main(int argc, char* argv[])
     fclose(fp);
     return 0;
 }
-/**
- * compile gcc -O3 -march=native  goto_van.c matrix_ops.c -o gotovan -lm
- * run ./gotovan
- * or ./gotovan 1 for debug that prints
- * output csvs in output
- */

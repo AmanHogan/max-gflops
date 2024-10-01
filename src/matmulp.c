@@ -3,7 +3,6 @@
  * Uta - Parallel proccesing
  * Performing matrix multiplication using different
  * loop orderings and tiems them. 
- * gcc -fopenmp -O3 -march=native  matmulp.c -o matmulp -lm
  */
 
 #include <stdio.h>
@@ -22,7 +21,7 @@ void free_memory(int N, double** A, double** B, double** C);
 int main() 
 {
     // Length and width of all matrices
-    int N = 512 * 2;
+    int N = 512 * 3;
 
     // A Matrix
     double** A = (double**)malloc(N * sizeof(double*));

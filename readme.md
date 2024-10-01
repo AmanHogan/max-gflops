@@ -1,34 +1,47 @@
-Here is a **README** that includes details about both the matrix multiplication programs you provided:
+# Summary
+### Matrix Multiplication Optimizations
+This repository contains two matrix multiplication programs, each demonstrating different approaches to optimize performance through various techniques mentioned in [Anatomy of High-Performance Matrix Multiplication by KAZUSHIGE GOTO and ROBERT A. VAN DE GEIJN](https://www.cs.utexas.edu/~flame/pubs/GotoTOMS_revision.pdf). This project is apart of the 2024 Fall Semester at UTA for parallel processing.
 
 ---
 
-# Matrix Multiplication Optimizations
+# Prerequisites
 
-This repository contains two matrix multiplication programs, each demonstrating different approaches to optimize performance through various techniques mentioned in Anatomy of High-Performance Matrix Multiplication by KAZUSHIGE GOTO and ROBERT A. VAN DE GEIJN.
+- gnu gcc compiler
+- Intel Proccessor
+- python3, numpy, pandas, matplotlib(optional)
 
----
+# How to run
 
-## Programs:
+To get started, clone or download this repository and navigate to the src directory:
 
-### 1. **Matrix Multiplication with GEBP Optimization (`goto_van.c`)**
+```bash
+cd src
+```
 
-This program performs matrix multiplication using the ***GEBP** algorithm mentioned in Anatomy of High-Performance Matrix. It optimizes cache usage by breaking the matrices into blocks that fit within the L1 and L2 caches of modern CPUs. All matrices are accessed and stored in **column-major order** via the terms of the project.
+There are two files to run: One that shows basic GFLOPS for different loop orderings (`matmulp.c`), and one that implments the GEBP optimization (`goto_van.c`).
 
-#### Features:
-- **GEBP Algorithm**: Optimizes matrix multiplication by processing smaller sub-blocks of matrices.
-- **Configurable Block Sizes**: You can adjust block sizes to fit different cache sizes and registers.
-- **Column-Major Storage**: Matrices are stored in column-major order to align with certain linear algebra libraries and hardware optimizations.
-- **Performance Output**: The program outputs detailed performance metrics, including GFLOPS and cache usage, and saves them to a CSV file.
+### Matmulp.c
 
-#### Compilation:
+To run `matmulp.c`, in the src directory, compule the file with:
+
+```bash
+gcc -fopenmp -O3 -march=native  matmulp.c -o matmulp -lm
+```
+Then run:
+
+```bash
+./matmulp
+```
+
+### Gotovan.c
+
+To compile, in the src dir, run:
 
 ```bash
 gcc -O3 -march=native goto_van.c matrix_ops.c -o gotovan -lm
 ```
 
-#### Usage:
-
-Run the program normally:
+And then you can run the program normally with:
 
 ```bash
 ./gotovan
@@ -40,94 +53,52 @@ Or in debug mode (which prints intermediate matrices):
 ./gotovan 1
 ```
 
-#### Output:
-
-The program generates a CSV file located at `../output/gotovan.csv` with the following columns:
-- Block sizes (`k_c`, `n_r`, `m_r`)
-- GFLOPS
-- Time taken (in seconds)
-- Cache usage (L1 and L2)
-
-#### Example Output:
-
+You can visualize the output with:
 ```bash
-Matrix Sizes: 4096x4096
-Block Sizes: m_c = 170, k_c = 170, n_r = 8, m_r = 16
-Time taken: 12.345678 seconds
-GFLOPS: 200.123456
-GFLOPS Utilization: 0.95
-B block size (KB)/L1 Cache size: 8/32.000000
-A block size (KB)/L2 Cache size: 256/256.000000
+python3 visualize.py
 ```
 
----
+That will generate a 3d scatter plot using your csv data.
 
-### 2. **Matrix Multiplication with Different Loop Orderings (`matmulp.c`)**
+Note: when running in debug mode, matricies are printed to the console. So ensure that these matricies are small enough not to overflow the terminal.
 
-This program demonstrates matrix multiplication using six different loop orderings. Each of the following loop permutations is timed and measured for performance:
+### Output
 
-- `ijk` (Standard)
-- `ikj`
-- `kij`
-- `kji`
-- `jki`
-- `jik`
+Each program generates a CSV file located at `../output/` with details about the runtime. The visualizations are also included in the output folder.
 
-The program measures the performance of each permutation in terms of GFLOPS and outputs the results to the console and a CSV file.
+# Additional Notes
+Before running, you should probably tailor the program to you PC to get accurate utilization and GFLOP calcualtions. For the `gotovan.c`, you can find the piece of code to modify at the top:
 
-#### Features:
-- **Six Loop Orderings**: Tests different loop orderings for matrix multiplication to determine the best-performing one.
-- **Performance Metrics**: Records the time taken and GFLOPS for each permutation and outputs the data to a CSV file.
-- **Matrix Reset**: Resets the result matrix before each multiplication to ensure correct measurements.
+```c
+#define MAX_FREQ (3.3)
+#define CACHE_L1_SIZE (32 * 1024)  // L1 cache size 
+#define CACHE_L2_SIZE (double)(256 * 1024)  // L2 cache size
+#define ELEMENT_SIZE sizeof(double)  // Size of each matrix element
+#define MAX_FREQ (3.97) // Max Clock Frequency of CPU core
+#define L1_SIZE_KB (CACHE_L1_SIZE / 1024.00) // L1 cache size kb
+#define L2_SIZE_KB (CACHE_L2_SIZE / 1024.00) // L2 cache size kb
+#define DEFAULT_N (1024 * 3) // Default dims of matricies
 
-#### Compilation:
-
-```bash
-gcc -fopenmp -O3 -march=native matmulp.c -o matmulp -lm
+/**
+ * Max Clock Frequency of CPU core.
+ *  (Frequency in GHz) x (# doubles in AVX size)
+ *  x (2 for FMA instruction) x (# of AVX units)
+ */
+#define MAX_FLOPS (MAX_FREQ * 4 * 2 * 2) // Max Gflops per core of CPU
 ```
-
-#### Usage:
-
-To run the program:
-
-```bash
-./matmulp
-```
-
-#### Output:
-
-The program generates a CSV file located at `../output/matmulp_results.csv` with the following columns:
-- Loop order (`ijk`, `ikj`, etc.)
-- Time taken (in seconds)
-- GFLOPS
-
-#### Example Output:
-
-```bash
-Matrix Multiplications:
-ijk order: 2.345678 seconds. GFLOPS: 150.123456
-ikj order: 2.123456 seconds. GFLOPS: 160.123456
-kij order: 2.567890 seconds. GFLOPS: 140.567890
-...
-```
-
-Each of these orders will exhibit different performance characteristics based on cache locality and memory access patterns.
-
----
+You can find the neccessary values by typing into your terminal `lscpu` or looking up your specs on Intel Ark.
 
 ## Program Files:
 
 ### `goto_van.c`:
-- Matrix multiplication using the **Generalized Blocked Panel (GEBP)** algorithm.
+- Matrix multiplication using the GEBP algorithm.
 - Outputs performance metrics including GFLOPS and cache usage.
 
 ### `matmulp.c`:
 - Matrix multiplication using six different loop orderings.
 - Outputs performance metrics and writes results to a CSV file.
 
----
-
-## Contributors:
+# Contributors:
 - Aman Hogan-Bailey
-- Anatomy of High-Performance Matrix Multiplication by KAZUSHIGE GOTO and ROBERT A. VAN DE GEIJN
+- [Anatomy of High-Performance Matrix Multiplication by KAZUSHIGE GOTO and ROBERT A. VAN DE GEIJN](https://www.cs.utexas.edu/~flame/pubs/GotoTOMS_revision.pdf).
 - University of Texas at Arlington
